@@ -55,9 +55,9 @@ public class TeslaTurtle extends LinearOpMode {
         while (opModeIsActive()) {
             // linear extension
             if (gamepad2.dpad_up) {
-                linearPower = 1;
+                linearPower = 0.5;
             } else if (gamepad2.dpad_down) {
-                linearPower = -1;
+                linearPower = -0.5;
             } else {
                 linearPower = 0;
             }
