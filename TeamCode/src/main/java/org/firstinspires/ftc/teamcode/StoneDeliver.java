@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="FoundationPuller", group="HGT")
+@Autonomous(name="StoneDeliver", group="HGT")
 public class StoneDeliver extends FoundationPuller {
 
     @Override
@@ -87,8 +87,6 @@ public class StoneDeliver extends FoundationPuller {
         // open the claw to drop the stone
         robot.servo1.setPosition(1);
         sleep(1000);     // pause for servos to move
-
-        // todo: move to line under bridge
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

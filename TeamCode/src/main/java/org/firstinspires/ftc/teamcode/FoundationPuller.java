@@ -100,14 +100,20 @@ public class FoundationPuller extends LinearOpMode {
         encoderDrive(DRIVE_SPEED, 48, 48, 4.0);
 
         // todo: move to line under bridge
-
+        //debugging
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
+    //left turn method
     void leftTurn90() {
-        encoderDrive(TURN_SPEED,   16, -16, 4.0);
+        encoderDrive(TURN_SPEED,   -9, 9, 4.0);
     }
+
+    void rightTurn90() {
+        encoderDrive(TURN_SPEED,   9, -9, 4.0);
+    }
+
 
     /*
      *  Method to perfmorm a relative move, based on encoder counts.

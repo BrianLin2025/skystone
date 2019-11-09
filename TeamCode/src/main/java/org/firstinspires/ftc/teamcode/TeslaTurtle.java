@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="TeslaTurtle", group="HGT")
 public class TeslaTurtle extends LinearOpMode {
+    //has motor and servo info
     Robot robot = new Robot();
 
     private static final double CLAW_SPEED = 0.01;  // sets rate to move servo
@@ -21,6 +22,7 @@ public class TeslaTurtle extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        //robot config
         robot.init(hardwareMap);
 
         // Wait for the game to start (driver presses PLAY)
@@ -77,6 +79,7 @@ public class TeslaTurtle extends LinearOpMode {
             clawOffset3 = Range.clip(clawOffset3, 0, 1);
             robot.servo3.setPosition(clawOffset3);
 
+            //debugging
             telemetry.addData("Servo", "%5.2f, %5.2f, %5.2f",
                     clawOffset1, clawOffset2, clawOffset3);
             telemetry.addData("Motors", "left (%.2f), right (%.2f), linear: (%.2f)",

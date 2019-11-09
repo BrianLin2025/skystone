@@ -48,7 +48,9 @@ public class BlueSideParking extends FoundationPuller {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        encoderDrive(DRIVE_SPEED, 60, 30, 4.0);
+        encoderDrive(DRIVE_SPEED, 6, 6, 4.0);
+        rightTurn90();
+        encoderDrive(DRIVE_SPEED, 30, 30, 4.0);
 
         telemetry.addData("Path", "Complete");
     }

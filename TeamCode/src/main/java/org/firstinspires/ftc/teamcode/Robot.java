@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class Robot {
     /* Public OpMode members. */
+    //null = nothing, not 0
     public DcMotor  leftDrive   = null;
     public DcMotor  rightDrive  = null;
     public DcMotor  linearDrive = null;
@@ -25,6 +26,7 @@ public class Robot {
     public void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
         hwMap = ahwMap;
+        //hardwaremap = robot config
 
         // Define and Initialize Motors
         leftDrive  = hwMap.get(DcMotor.class, "leftDrive");
@@ -32,6 +34,7 @@ public class Robot {
         linearDrive = hwMap.get(DcMotor.class, "linearDrive");
 
         // Set all motors to run without encoder by default
+        //encoder = fll degrees
         leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
