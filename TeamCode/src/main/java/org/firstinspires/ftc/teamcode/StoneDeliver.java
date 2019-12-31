@@ -59,7 +59,7 @@ public class StoneDeliver extends FoundationPuller {
         sleep(1000);     // pause for servos to move
 
         // drive forward to stones
-        encoderDrive(DRIVE_SPEED,  48,  48, 4.0);
+        encoderDrive(DRIVE_SPEED,  30,  30, 4.0);
 
         // close the claw
         robot.servo1.setPosition(0);
