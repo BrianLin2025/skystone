@@ -12,7 +12,7 @@ public class HyperBotDriver extends LinearOpMode {
     //has motor and servo info
     HyperBot robot = new HyperBot();
 
-    private static final double CLAW_SPEED = 0.01;  // sets rate to move servo
+    private static final double CLAW_SPEED = 0.1;  // sets rate to move servo
 
     double sidewayRightX         = 0;
     double forwardY         = 0;
