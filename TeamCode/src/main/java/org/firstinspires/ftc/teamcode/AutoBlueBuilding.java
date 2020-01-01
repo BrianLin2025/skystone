@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 @Autonomous(name="AutoBlueBuilding", group="HGT")
 public class AutoBlueBuilding extends AutoBot {
 
@@ -32,7 +34,7 @@ public class AutoBlueBuilding extends AutoBot {
         sleep(300);
 
         // pull foundation back
-        move(robot, 0.4, 60, 6, BACK);
+        move(robot, 0.4, 57.5, 5, BACK);
         sleep(800);
 
         //release foundation
@@ -46,19 +48,44 @@ public class AutoBlueBuilding extends AutoBot {
         } else {
             direction = LEFT;
         }
-        move(robot, 1, 75, 6, direction);
+
+        //Go out from behind the foundation
+        move(robot, 1, 30, 6, direction);
         sleep(500);
 
-        //drive to stones
-        move(robot, 1, 32, 3, FORWARD);
+        //move forward so we won't bump into the other robot
+        move(robot, 1, 24, 6, FORWARD);
         sleep(500);
+
+        //go under the bridge
+        move(robot, 1, 47, 6, direction);
+        sleep(500);
+
+        //drive to stones using distance sensor
+        moveWithDistanceSensor(robot, 0.25, 8, 3, FORWARD, 1.5);
+        sleep(200);
+
+        double inchesToMoveBack = 36;
+
+        for(int i = 0; i < 5; i++) {
+            telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
+                    robot.distanceSensor.getDistance(DistanceUnit.INCH),
+                    robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
+            telemetry.update();
+
+            if(!isBlackStone(robot)) {
+                move(robot, 1, 8, 6, direction);
+                sleep(200);
+                inchesToMoveBack += 8; // every time we move away from bridge, we need to move more back
+            }
+        }
 
         //grab stone
         closeClaw(robot);
         sleep(500);
 
         //move back
-        move(robot, 1, 31, 3, BACK);
+        move(robot, 1, 6, 3, BACK);
         sleep(500);
 
         //move to deliver stone
@@ -67,7 +94,7 @@ public class AutoBlueBuilding extends AutoBot {
         } else {
             direction = RIGHT;
         }
-        move(robot, 1, 40, 4, direction);
+        move(robot, 1, inchesToMoveBack, 4, direction);
         sleep(500);
 
         //deliver stone
@@ -80,7 +107,7 @@ public class AutoBlueBuilding extends AutoBot {
         } else {
             direction = LEFT;
         }
-        move(robot, 1, 15, 2, direction);
+        move(robot, 1, 12, 2, direction);
     }
 
 }

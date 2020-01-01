@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 @Autonomous(name="AutoBot", group="HGT")
 @Disabled
 public class AutoBot extends LinearOpMode {
@@ -41,6 +43,14 @@ public class AutoBot extends LinearOpMode {
     }
 
     public void move(HyperBot robot, double speed, double inches, int timeoutS, int direction) {
+        moveInternal(robot, speed, inches, timeoutS, direction, -1);
+    }
+
+    public void moveWithDistanceSensor(HyperBot robot, double speed, double inches, int timeoutS, int direction, double minDistance) {
+        moveInternal(robot, speed, inches, timeoutS, direction, minDistance);
+    }
+
+    private void moveInternal(HyperBot robot, double speed, double inches, int timeoutS, int direction, double minDistance) {
         int frontLeftTarget = 0;
         int frontRightTarget = 0;
         int backLeftTarget = 0;
@@ -98,10 +108,18 @@ public class AutoBot extends LinearOpMode {
             // always end the motion as soon as possible.
             // However, if you require that BOTH motors have finished their moves before the robot continues
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS) &&
-                    (robot.frontLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy() && robot.backRight.isBusy())) {
-                sleep(50);
+            if (minDistance > 0) {
+                while (opModeIsActive() &&
+                        (runtime.seconds() < timeoutS) &&
+                        robot.distanceSensor.getDistance(DistanceUnit.INCH) > minDistance) {
+                    sleep(50);
+                }
+            } else {
+                while (opModeIsActive() &&
+                        (runtime.seconds() < timeoutS) &&
+                        (robot.frontLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy() && robot.backRight.isBusy())) {
+                    sleep(50);
+                }
             }
 
             // Stop all motion;
@@ -124,6 +142,10 @@ public class AutoBot extends LinearOpMode {
 
     public void closeClaw (HyperBot robot) {
         robot.clawServo.setPosition(1);
+    }
+
+    public boolean isBlackStone(HyperBot robot) {
+        return robot.colorSensor.red() < 60;
     }
 
 }
