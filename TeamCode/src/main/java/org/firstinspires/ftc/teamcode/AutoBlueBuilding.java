@@ -122,6 +122,8 @@ public class AutoBlueBuilding extends AutoBot {
             direction = LEFT;
         }
         move(robot, 1, 12.5, 2, direction);
+
+        //i like my fanta wit no ice
     }
 
 }
