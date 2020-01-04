@@ -68,7 +68,7 @@ public class AutoBlueBuilding extends AutoBot {
         sleep(250);
 
         //go under the bridge
-        move(robot, 0.75, 52, 6, direction);
+        move(robot, 0.75, 52.5                                                                                                             , 6, direction);
         sleep(250);
 
         //0pen the claw
@@ -76,10 +76,10 @@ public class AutoBlueBuilding extends AutoBot {
         sleep(500);
 
         //drive to stones using distance sensor
-        moveWithDistanceSensor(robot, 0.25, 20, 8, FORWARD, 1.5);
+        moveWithDistanceSensor(robot, 0.2, 20, 8, FORWARD, 1.65);
         sleep(200);
 
-        double inchesToMoveBack = 40;
+        double inchesToMoveBack = 45;
 
         for(int i = 0; i < 5; i++) {
             telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
@@ -94,6 +94,14 @@ public class AutoBlueBuilding extends AutoBot {
             }
         }
 
+        //align
+        if (isBlueSide) {
+            direction = LEFT;
+        } else {
+            direction = RIGHT;
+        }
+        move(robot, 0.7,4,2,direction);
+
         //grab stone
         closeClaw(robot);
         sleep(500);
@@ -103,17 +111,12 @@ public class AutoBlueBuilding extends AutoBot {
         sleep(250);
 
         //move to deliver stone
-        if (isBlueSide) {
-            direction = LEFT;
-        } else {
-            direction = RIGHT;
-        }
         move(robot, 1, inchesToMoveBack, 4, direction);
         sleep(250);
 
         //deliver stone
         openClaw(robot);
-        sleep(500);
+        sleep(400);
 
         //park
         if (isBlueSide) {
@@ -121,7 +124,7 @@ public class AutoBlueBuilding extends AutoBot {
         } else {
             direction = LEFT;
         }
-        move(robot, 1, 12.5, 2, direction);
+        move(robot, 1, 17.5, 2, direction);
     }
 
 }
