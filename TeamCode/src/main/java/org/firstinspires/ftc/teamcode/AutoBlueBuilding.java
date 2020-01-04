@@ -58,18 +58,18 @@ public class AutoBlueBuilding extends AutoBot {
             direction = LEFT;
         }
         move(robot, 0.8, 30.5, 6, direction);
-        sleep(400);
+        sleep(250);
 
         //close the claw
         closeClaw(robot);
 
         //move forward so we won't bump into the other robot
         move(robot, 0.9, 18.5, 6, FORWARD);
-        sleep(500);
+        sleep(250);
 
         //go under the bridge
         move(robot, 0.75, 52, 6, direction);
-        sleep(500);
+        sleep(250);
 
         //0pen the claw
         openClaw(robot);
@@ -100,7 +100,7 @@ public class AutoBlueBuilding extends AutoBot {
 
         //move back
         move(robot, 1, 7, 3, BACK);
-        sleep(500);
+        sleep(250);
 
         //move to deliver stone
         if (isBlueSide) {
@@ -109,7 +109,7 @@ public class AutoBlueBuilding extends AutoBot {
             direction = RIGHT;
         }
         move(robot, 1, inchesToMoveBack, 4, direction);
-        sleep(500);
+        sleep(250);
 
         //deliver stone
         openClaw(robot);
