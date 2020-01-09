@@ -14,8 +14,8 @@ public class HyperBot {
     public DcMotor  frontRight  = null;
     public DcMotor  backLeft    = null;
     public DcMotor  backRight   = null;
-//    public DcMotor  linearDrive = null;
-    public CRServo    linearServo = null;
+    public DcMotor  linearDrive = null;
+    //public CRServo    linearServo = null;
     public Servo      clawServo   = null;
 
     public ColorSensor colorSensor = null;
@@ -39,6 +39,7 @@ public class HyperBot {
         frontRight = hwMap.get(DcMotor.class, "frontRight");
         backLeft = hwMap.get(DcMotor.class, "backLeft");
         backRight = hwMap.get(DcMotor.class, "backRight");
+        linearDrive = hwMap.get(DcMotor.class, "linearDrive");
 
         // Set all motors to run without encoder by default
         //encoder = fll degrees
@@ -46,21 +47,22 @@ public class HyperBot {
         frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Set motor directions
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
+        linearDrive.setDirection(DcMotor.Direction.FORWARD);
 
         // Set all motors to zero power
         frontLeft.setPower(0);
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
+        linearDrive.setPower(0);
 
-        // Define and initialize servos
-        linearServo  = hwMap.crservo.get("linearServo");
 
         clawServo  = hwMap.get(Servo.class, "clawServo");
         clawServo.setPosition(1);

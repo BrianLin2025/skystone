@@ -35,8 +35,8 @@ public class HyperBotDriver extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            double linearPower = gamepad2.right_stick_y * -1;
-            robot.linearServo.setPower(linearPower);
+            double linearPower = gamepad2.right_stick_y * -2;
+            robot.linearDrive.setPower(linearPower);
 
             //driving robot
             sidewayRightX = gamepad1.left_stick_x; // left stick right(1)/left(-1)
