@@ -5,7 +5,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @Autonomous(name="HyperBotAutoMode", group="HGT")
 public class HyperBotAutoMode extends AutoBot{
-    public int isBlueSide = 1;
+    public int isBlueSide = -1;
     double leftX = 0;
     public int foundationSide  = 1;
     double leftY = 0;
