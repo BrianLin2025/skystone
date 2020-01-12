@@ -38,6 +38,7 @@ public class AutoBlueBuilding extends AutoBot {
 
         //grab foundation
         closeClaw(robot);
+        closeFClaw(robot);
         sleep(1000);
 
         move(robot, 1, 2, 3, FORWARD);
@@ -49,6 +50,7 @@ public class AutoBlueBuilding extends AutoBot {
 
         //release foundation
         openClaw(robot);
+        openFClaw(robot);
         sleep(300);
 
         //Go out from behind the foundation
