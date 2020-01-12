@@ -5,9 +5,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @Autonomous(name="HyperBotAutoMode", group="HGT")
 public class HyperBotAutoMode extends AutoBot{
-    public int isBlueSide = -1;
+    public int isBlueSide = 1;
     double leftX = 0;
-    public int foundationSide  = 1;
+    public int foundationSide  = -1;
     double leftY = 0;
     public int parkTop = 1;
     double rightX = 0;
@@ -203,13 +203,13 @@ public class HyperBotAutoMode extends AutoBot{
             //scan for skystone
             int ii = 3;
             double inchesToMoveBack = 2;
-            for (int i = 0; i < 5 && bricksToScan != i; i++) {
+            for (int i = 0; i < 5; i++) {
                 telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
                         robot.distanceSensor.getDistance(DistanceUnit.INCH),
                         robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
                 telemetry.update();
 
-                if (!isBlackStone(robot)) {
+                if (!isBlackStone(robot)  && bricksToScan != i) {
                     move(robot, 1, 8.5, 6, direction);
                     sleep(200);
                     inchesToMoveBack += 8.5; // every time we move away from the corner, we need to move more back

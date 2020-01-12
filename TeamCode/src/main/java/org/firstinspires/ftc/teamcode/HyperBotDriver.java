@@ -35,7 +35,7 @@ public class HyperBotDriver extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            double linearPower = gamepad2.right_stick_y * -1;
+            double linearPower = gamepad2.right_stick_y * -0.5;
             robot.linearDrive.setPower(linearPower);
 
             //driving robot
@@ -62,17 +62,19 @@ public class HyperBotDriver extends LinearOpMode {
             clawOffset = Range.clip(clawOffset, 0, 1);
             robot.clawServo.setPosition(clawOffset);
 
-            //debugging
-            telemetry.addData("Motors", "FL(%.2f), FR(%.2f), BL:(%.2f), BR:(%.2f), Linear:(%.2f)",
-                    frontLeftPower, frontRightPower, backLeftPower, backRightPower);
-            telemetry.addData("Servos", "Claw(%.2f)",
-                    clawOffset, linearPower);
+            telemetry.addData("Motors", "Linear:(%d)",
+                    robot.linearDrive.getCurrentPosition());
 
-            telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
-                    robot.distanceSensor.getDistance(DistanceUnit.INCH),
-                    robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
-
-            telemetry.update();
+//            //debugging
+//            telemetry.addData("Motors", "FL(%.2f), FR(%.2f), BL:(%.2f), BR:(%.2f), Linear:(%.2f)",
+//                    frontLeftPower, frontRightPower, backLeftPower, backRightPower);
+//            telemetry.addData("Servos", "Claw(%.2f)", clawOffset);
+//
+//            telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
+//                    robot.distanceSensor.getDistance(DistanceUnit.INCH),
+//                    robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
+//
+//            telemetry.update();
         }
     }
 }

@@ -20,7 +20,7 @@ public class AutoBlueBuilding extends AutoBot {
         waitForStart();
         //open claw
         openClaw(robot);
-        sleep(500);
+//        sleep(500);
 
         //move to foundation
         int direction = 0;
@@ -34,18 +34,18 @@ public class AutoBlueBuilding extends AutoBot {
 
         //move to foundation
         move(robot, 1, 34.5, 3, FORWARD);
-        sleep(250);
+//        sleep(250);
 
         //grab foundation
         closeClaw(robot);
         sleep(1000);
 
         move(robot, 1, 2, 3, FORWARD);
-        sleep(250);
+        sleep(50);
 
         // pull foundation back
-        move(robot, 0.245, 68, 9, BACK);
-        sleep(250);
+        move(robot, 0.4, 50, 9, BACK);
+        sleep(50);
 
         //release foundation
         openClaw(robot);
@@ -58,26 +58,26 @@ public class AutoBlueBuilding extends AutoBot {
             direction = LEFT;
         }
         move(robot, 0.8, 30.5, 6, direction);
-        sleep(250);
+//        sleep(250);
 
         //close the claw
         closeClaw(robot);
 
         //move forward so we won't bump into the other robot
         move(robot, 0.9, 18.5, 6, FORWARD);
-        sleep(250);
+//        sleep(250);
 
         //go under the bridge
         move(robot, 0.75, 52.5                                                                                                             , 6, direction);
-        sleep(250);
+//        sleep(250);
 
         //0pen the claw
         openClaw(robot);
-        sleep(500);
+        sleep(400);
 
         //drive to stones using distance sensor
-        moveWithDistanceSensor(robot, 0.2, 20, 8, FORWARD, 1.65);
-        sleep(200);
+        moveWithDistanceSensor(robot, 0.4, 20, 8, FORWARD, 1.65);
+//        sleep(200);
 
         double inchesToMoveBack = 45;
 
@@ -89,7 +89,7 @@ public class AutoBlueBuilding extends AutoBot {
 
             if(!isBlackStone(robot)) {
                 move(robot, 0.65 , 8.5, 6, direction);
-                sleep(200);
+//                sleep(200);
                 inchesToMoveBack += 8.75; // every time we move away from bridge, we need to move more back
             }
         }
@@ -104,19 +104,19 @@ public class AutoBlueBuilding extends AutoBot {
 
         //grab stone
         closeClaw(robot);
-        sleep(500);
+        sleep(400);
 
         //move back
-        move(robot, 1, 7, 3, BACK);
-        sleep(250);
+        move(robot, 1, 11, 3, BACK);
+//        sleep(250);
 
         //move to deliver stone
         move(robot, 1, inchesToMoveBack, 4, direction);
-        sleep(250);
+//        sleep(250);
 
         //deliver stone
         openClaw(robot);
-        sleep(400);
+        sleep(100);
 
         //park
         if (isBlueSide) {
