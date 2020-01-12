@@ -82,9 +82,9 @@ public class HyperBotDriver extends LinearOpMode {
                 robot.leftServo.setPosition(0);
             }
             if (gamepad2.left_stick_y < -0.5) {
-                robot.rightServo.setPosition(1);
-            } else if (gamepad2.left_stick_y > 0.5) {
                 robot.rightServo.setPosition(0);
+            } else if (gamepad2.left_stick_y > 0.5) {
+                robot.rightServo.setPosition(1);
             }
 
 

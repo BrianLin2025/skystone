@@ -143,12 +143,12 @@ public class AutoBot extends LinearOpMode {
     public void closeClaw (HyperBot robot) { robot.clawServo.setPosition(1); }
 
     public void closeFClaw (HyperBot robot) {
-        robot.leftServo.setPosition(0);
-        robot.rightServo.setPosition(0);
-    }
-    public void openFClaw (HyperBot robot) {
         robot.leftServo.setPosition(1);
         robot.rightServo.setPosition(1);
+    }
+    public void openFClaw (HyperBot robot) {
+        robot.leftServo.setPosition(0);
+        robot.rightServo.setPosition(0);
     }
 
     public boolean isBlackStone(HyperBot robot) {

@@ -72,7 +72,7 @@ public class HyperBot {
         leftServo  = hwMap.get(Servo.class, "leftServo");
         leftServo.setPosition(1);
         rightServo  = hwMap.get(Servo.class, "rightServo");
-        rightServo.setPosition(1);
+        rightServo.setPosition(0);
 
         colorSensor = ahwMap.get(ColorSensor.class, "colorSensor");
         distanceSensor = ahwMap.get(DistanceSensor.class, "distanceSensor");
