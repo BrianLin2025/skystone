@@ -14,7 +14,7 @@ public class HyperBotDriver extends LinearOpMode {
 
     private static final double CLAW_SPEED = 0.25;  // sets rate to move servo
 
-    double sidewayRightX         = 0;
+    double sidewayRightX    = 0;
     double forwardY         = 0;
     double turn             = 0;
 
@@ -22,6 +22,13 @@ public class HyperBotDriver extends LinearOpMode {
     double frontRightPower  = 0;
     double backLeftPower    = 0;
     double backRightPower   = 0;
+    double leftServo        = 0;
+    /*boolean leftTop   = false;
+    boolean rightTop    = false;
+    boolean leftBottom  = false;
+    boolean rightBottom = false;
+    double layer = 1;
+    int x;*/
 
     double clawOffset = 1;
 
@@ -35,6 +42,7 @@ public class HyperBotDriver extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+//            x = robot.linearDrive.getCurrentPosition();
             double linearPower = gamepad2.right_stick_y * -0.5;
             robot.linearDrive.setPower(linearPower);
 
@@ -48,10 +56,15 @@ public class HyperBotDriver extends LinearOpMode {
             backLeftPower    = Range.clip(forwardY - sidewayRightX + turn, -1.0, 1.0) ;
             backRightPower   = Range.clip(forwardY + sidewayRightX - turn, -1.0, 1.0) ;
 
-            robot.frontLeft.setPower(frontLeftPower);
-            robot.frontRight.setPower(frontRightPower);
-            robot.backLeft.setPower(backLeftPower);
-            robot.backRight.setPower(backRightPower);
+//            robot.frontLeft.setPower(frontLeftPower);
+//            robot.frontRight.setPower(frontRightPower);
+//            robot.backLeft.setPower(backLeftPower);
+//            robot.backRight.setPower(backRightPower);
+
+            robot.frontLeft.setPower(frontLeftPower * Math.abs(frontLeftPower));
+            robot.frontRight.setPower(frontRightPower * Math.abs(frontRightPower));
+            robot.backLeft.setPower(backLeftPower * Math.abs(backLeftPower));
+            robot.backRight.setPower(backRightPower * Math.abs(backRightPower));
 
             // the position 1 is when the claw is closed and 0 is open so to open the claw it subtracts
             if (gamepad2.dpad_up) {
@@ -61,6 +74,18 @@ public class HyperBotDriver extends LinearOpMode {
             }
             clawOffset = Range.clip(clawOffset, 0, 1);
             robot.clawServo.setPosition(clawOffset);
+
+            //foundation claw
+            if (gamepad2.left_stick_y < -0.5) {
+                robot.leftServo.setPosition(1);
+            } else if (gamepad2.left_stick_y > 0.5) {
+                robot.leftServo.setPosition(0);
+            }
+
+
+//            if (leftTop) {
+//                robot.linearDrive.setPower(0);
+//            }
 
             telemetry.addData("Motors", "Linear:(%d)",
                     robot.linearDrive.getCurrentPosition());
@@ -74,7 +99,7 @@ public class HyperBotDriver extends LinearOpMode {
 //                    robot.distanceSensor.getDistance(DistanceUnit.INCH),
 //                    robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
 //
-//            telemetry.update();
+            telemetry.update();
         }
     }
 }
