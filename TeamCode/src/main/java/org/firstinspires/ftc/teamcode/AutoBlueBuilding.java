@@ -45,7 +45,7 @@ public class AutoBlueBuilding extends AutoBot {
         sleep(50);
 
         // pull foundation back
-        move(robot, 0.4, 50, 9, BACK);
+        move(robot, 1, 50, 9, BACK);
         sleep(50);
 
         //release foundation
