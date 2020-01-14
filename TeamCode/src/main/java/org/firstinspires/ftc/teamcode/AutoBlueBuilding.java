@@ -75,10 +75,11 @@ public class AutoBlueBuilding extends AutoBot {
 
         //0pen the claw
         openClaw(robot);
+        openFClaw(robot);
         sleep(400);
 
         //drive to stones using distance sensor
-        moveWithDistanceSensor(robot, 0.4, 20, 8, FORWARD, 1.65);
+        moveWithDistanceSensor(robot, 0.4, 16, 8, FORWARD, 1.65);
 //        sleep(200);
 
         double inchesToMoveBack = 45;

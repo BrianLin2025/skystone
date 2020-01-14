@@ -48,7 +48,7 @@ public class CornerCampBlue extends AutoBot{
         //scan for skystone
         int ii = 3;
         double inchesToMoveBack = 2;
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 3; i++) {
             telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
                     robot.distanceSensor.getDistance(DistanceUnit.INCH),
                     robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
