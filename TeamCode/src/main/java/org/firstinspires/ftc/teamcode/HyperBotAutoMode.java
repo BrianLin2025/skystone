@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 @Autonomous(name="HyperBotAutoMode", group="HGT")
+@Disabled
 public class HyperBotAutoMode extends AutoBot{
     public int isBlueSide = 1;
     double leftX = 0;
@@ -18,6 +19,7 @@ public class HyperBotAutoMode extends AutoBot{
     public int bricksToScan = 3;
     //boolean bumper;
     //boolean bumper2;
+
 
 
     @Override

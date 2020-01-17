@@ -49,7 +49,10 @@ public class HyperBot {
         frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        linearDrive.setTargetPosition(0);
+        linearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
 
         // Set motor directions
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -57,6 +60,8 @@ public class HyperBot {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.FORWARD);
         linearDrive.setDirection(DcMotor.Direction.FORWARD);
+
+
 
         // Set all motors to zero power
         frontLeft.setPower(0);

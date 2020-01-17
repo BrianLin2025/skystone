@@ -44,20 +44,47 @@ public class HyperBotDriver extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         x = robot.linearDrive.getCurrentPosition();
+        robot.linearDrive.setTargetPosition(x);
         int layer1 = 104 + x;
-        int layer2 = 205 + x; //323
-        int layer3 = 420 + x;
-        int layer4 = 560 + x;
-        int layer5 = 720 + x;
-        int layer6 = 880 + x;
-        int layer7 = 1080 + x;
+        int layer2 = 295 + x;
+        int layer3 = 440 + x;
+        int layer4 = 600 + x;
+        int layer5 = 750 + x;
+        int layer6 = 910 + x;
+        int layer7 = 1100 + x;
+        int targetPosition;
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             //linear extension
 //            linearExtensionHeight = robot.linearDrive.getCurrentPosition();
 //            if (linearExtensionHeight <= x + 500 && linearExtensionHeight >= x + 0) { // 1040
-                    double linearPower = gamepad2.right_stick_y * -0.5;
-                    robot.linearDrive.setPower(linearPower);
+//                    double linearPower = gamepad2.right_stick_y * -0.5;
+//                    robot.linearDrive.setPower(linearPower);
+
+            if(gamepad2.right_bumper) {
+                targetPosition = robot.linearDrive.getTargetPosition();
+                if (targetPosition == x){
+                    robot.linearDrive.setTargetPosition(layer1);
+                    if (robot.linearDrive.getCurrentPosition() < layer1) {
+                        robot.linearDrive.setPower(0.5);
+                    }
+                }
+                if (targetPosition == layer1){
+                    robot.linearDrive.setTargetPosition(layer2);
+                    if (robot.linearDrive.getCurrentPosition() < layer2) {
+                        robot.linearDrive.setPower(0.5);
+                    }
+                }
+            }
+
+
+            if(gamepad2.left_bumper) {
+                robot.linearDrive.setTargetPosition(x);
+                if (robot.linearDrive.getCurrentPosition() > 0) {
+                    robot.linearDrive.setPower(-0.5);
+
+                }
+            }
 //            }
 
 //            if(layer != 7) {
@@ -110,6 +137,8 @@ public class HyperBotDriver extends LinearOpMode {
 //                    }
 //                }
 //            }
+
+
             //driving robot
             sidewayRightX = gamepad1.left_stick_x; // left stick right(1)/left(-1)
             forwardY = gamepad1.left_stick_y * -1; // left stick forward(-1)/back(1)

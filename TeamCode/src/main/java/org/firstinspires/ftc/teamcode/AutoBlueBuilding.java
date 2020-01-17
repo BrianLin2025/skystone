@@ -31,7 +31,6 @@ public class AutoBlueBuilding extends AutoBot {
         }
         move(robot, 1, 12, 3, direction);
 
-
         //move to foundation
         move(robot, 1, 34.5, 3, FORWARD);
 //        sleep(250);
@@ -64,18 +63,18 @@ public class AutoBlueBuilding extends AutoBot {
 
         //close the claw
         closeClaw(robot);
+        closeFClaw(robot);
 
         //move forward so we won't bump into the other robot
         move(robot, 0.9, 18.5, 6, FORWARD);
 //        sleep(250);
 
         //go under the bridge
-        move(robot, 0.75, 52.5                                                                                                             , 6, direction);
+        move(robot, 0.75, 52.5, 6, direction);
 //        sleep(250);
 
         //0pen the claw
         openClaw(robot);
-        openFClaw(robot);
         sleep(400);
 
         //drive to stones using distance sensor
