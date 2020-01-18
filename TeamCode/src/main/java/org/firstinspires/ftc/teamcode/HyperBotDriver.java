@@ -85,59 +85,6 @@ public class HyperBotDriver extends LinearOpMode {
 
                 }
             }
-//            }
-
-//            if(layer != 7) {
-//                if (gamepad2.right_bumper) {
-//                    if (layer == 0 ) {
-//                        robot.linearDrive.setTargetPosition(layer1);
-//                    }
-//                    if (layer == 1 ) {
-//                        robot.linearDrive.setTargetPosition(layer2);
-//                    }
-//                    if (layer == 2 ) {
-//                        robot.linearDrive.setTargetPosition(layer3);
-//                    }
-//                    if (layer == 3 ) {
-//                        robot.linearDrive.setTargetPosition(layer4);
-//                    }
-//                    if (layer == 4 ) {
-//                        robot.linearDrive.setTargetPosition(layer5);
-//                    }
-//                    if (layer == 5 ) {
-//                        robot.linearDrive.setTargetPosition(layer6);
-//                    }
-//                    if (layer == 6 ) {
-//                        robot.linearDrive.setTargetPosition(layer7);
-//                    }
-//                }
-//            }
-//            if(layer != 0) {
-//                if (gamepad2.left_bumper) {
-//                    if (layer == 1 ) {
-//                        robot.linearDrive.setTargetPosition(x);
-//                    }
-//                    if (layer == 2 ) {
-//                        robot.linearDrive.setTargetPosition(layer1);
-//                    }
-//                    if (layer == 3 ) {
-//                        robot.linearDrive.setTargetPosition(layer2);
-//                    }
-//                    if (layer == 4 ) {
-//                        robot.linearDrive.setTargetPosition(layer3);
-//                    }
-//                    if (layer == 5 ) {
-//                        robot.linearDrive.setTargetPosition(layer4);
-//                    }
-//                    if (layer == 6 ) {
-//                        robot.linearDrive.setTargetPosition(layer5);
-//                    }
-//                    if (layer == 7 ) {
-//                        robot.linearDrive.setTargetPosition(layer6);
-//                    }
-//                }
-//            }
-
 
             //driving robot
             sidewayRightX = gamepad1.left_stick_x; // left stick right(1)/left(-1)
@@ -148,11 +95,6 @@ public class HyperBotDriver extends LinearOpMode {
             frontRightPower  = Range.clip(forwardY - sidewayRightX - turn, -1.0, 1.0) ;
             backLeftPower    = Range.clip(forwardY - sidewayRightX + turn, -1.0, 1.0) ;
             backRightPower   = Range.clip(forwardY + sidewayRightX - turn, -1.0, 1.0) ;
-
-//            robot.frontLeft.setPower(frontLeftPower);
-//            robot.frontRight.setPower(frontRightPower);
-//            robot.backLeft.setPower(backLeftPower);
-//            robot.backRight.setPower(backRightPower);
 
             robot.frontLeft.setPower(frontLeftPower * Math.abs(frontLeftPower) * Math.abs(frontLeftPower));
             robot.frontRight.setPower(frontRightPower * Math.abs(frontRightPower) * Math.abs(frontRightPower));
