@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
@@ -44,7 +46,7 @@ public class HyperBotDriver extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         x = robot.linearDrive.getCurrentPosition();
-        robot.linearDrive.setTargetPosition(x);
+        //robot.linearDrive.setTargetPosition(x);
         int layer1 = 104 + x;
         int layer2 = 295 + x;
         int layer3 = 440 + x;
@@ -56,12 +58,22 @@ public class HyperBotDriver extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             //linear extension
-//            linearExtensionHeight = robot.linearDrive.getCurrentPosition();
+            linearExtensionHeight = robot.linearDrive.getCurrentPosition();
 //            if (linearExtensionHeight <= x + 500 && linearExtensionHeight >= x + 0) { // 1040
-//                    double linearPower = gamepad2.right_stick_y * -0.5;
-//                    robot.linearDrive.setPower(linearPower);
+                    robot.linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    double linearPower = gamepad2.right_stick_y * -0.5;
+                    if(linearPower > 0 && linearExtensionHeight < 500 && linearPower != 0) {
+                            robot.linearDrive.setPower(linearPower);
+                    }
+                    if(linearPower < 0 && linearExtensionHeight > 0 && linearPower != 0) {
+                        robot.linearDrive.setPower(linearPower);
+                    }
+                    if(linearPower == 0) {
+                        robot.linearDrive.setPower(0);
+                    }
 
-            if(gamepad2.right_bumper) {
+
+            /*if(gamepad2.right_bumper) {
                 targetPosition = robot.linearDrive.getTargetPosition();
                 if (targetPosition == x){
                     robot.linearDrive.setTargetPosition(layer1);
@@ -84,7 +96,7 @@ public class HyperBotDriver extends LinearOpMode {
                     robot.linearDrive.setPower(-0.5);
 
                 }
-            }
+            }*/
 
             //driving robot
             sidewayRightX = gamepad1.left_stick_x; // left stick right(1)/left(-1)
@@ -127,18 +139,18 @@ public class HyperBotDriver extends LinearOpMode {
 //                robot.linearDrive.setPower(0);
 //            }
 
-            telemetry.addData("Motors", "Linear:(%d)",
-                    robot.linearDrive.getCurrentPosition());
+            telemetry.addData("Right stick", "stick_y:(%.2f)", gamepad2.right_stick_y);
 
 //            //debugging
-//            telemetry.addData("Motors", "FL(%.2f), FR(%.2f), BL:(%.2f), BR:(%.2f), Linear:(%.2f)",
-//                    frontLeftPower, frontRightPower, backLeftPower, backRightPower);
-//            telemetry.addData("Servos", "Claw(%.2f)", clawOffset);
-//
-//            telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
-//                    robot.distanceSensor.getDistance(DistanceUnit.INCH),
-//                    robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
-//
+            telemetry.addData("Motors", "FL(%.2f), FR(%.2f), BL:(%.2f), BR:(%.2f), L:(%.2f), Linear:(%d)",
+                    frontLeftPower, frontRightPower, backLeftPower, backRightPower, linearPower, robot.linearDrive.getCurrentPosition());
+            telemetry.addData("Servos", "Claw(%.2f)", clawOffset,
+                    robot.clawServo.getPosition());
+
+            telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
+                    robot.distanceSensor.getDistance(DistanceUnit.INCH),
+                    robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
+
             telemetry.update();
         }
     }
