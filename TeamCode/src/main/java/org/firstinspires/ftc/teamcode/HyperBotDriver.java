@@ -28,6 +28,7 @@ public class HyperBotDriver extends LinearOpMode {
     int linearExtensionHeight = 0;
     int layer                 = 0;
     int x                     = 0;
+    int MAX_LINEAR_POSITION   = 1000;
 
     double leftServo          = 0;
     /*boolean leftTop   = false;
@@ -45,7 +46,7 @@ public class HyperBotDriver extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        x = robot.linearDrive.getCurrentPosition();
+//        x = robot.linearDrive.getCurrentPosition();
         //robot.linearDrive.setTargetPosition(x);
         int layer1 = 104 + x;
         int layer2 = 295 + x;
@@ -62,18 +63,36 @@ public class HyperBotDriver extends LinearOpMode {
 //            if (linearExtensionHeight <= x + 500 && linearExtensionHeight >= x + 0) { // 1040
                     robot.linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                     double linearPower = gamepad2.right_stick_y * -0.5;
-                    if(linearPower > 0 && linearExtensionHeight < 500 && linearPower != 0) {
+
+                    if (linearPower > 0) {
+                        if ( linearExtensionHeight < MAX_LINEAR_POSITION) {
                             robot.linearDrive.setPower(linearPower);
-                    }
-                    if(linearPower < 0 && linearExtensionHeight > 0 && linearPower != 0) {
-                        robot.linearDrive.setPower(linearPower);
-                    }
-                    if(linearPower == 0) {
+                        }
+
+                    } else if (linearPower <0) {
+                        if ( linearExtensionHeight > 0) {
+                            robot.linearDrive.setPower(linearPower) ;
+                        }
+                    } else {
                         robot.linearDrive.setPower(0);
                     }
-
-
-            /*if(gamepad2.right_bumper) {
+//                    if (0 < linearExtensionHeight || linearExtensionHeight <  500) {
+//                        if (linearPower > 0 && linearExtensionHeight < 500) {
+//                            robot.linearDrive.setPower(linearPower);
+//                        } else if (linearPower > 0 && linearExtensionHeight > 500) {
+//                            robot.linearDrive.setPower(0);
+//                        }
+//                        if (linearPower < 0 && linearExtensionHeight > 0) {
+//                            robot.linearDrive.setPower(linearPower);
+//                        } else if (linearPower < 0 && linearExtensionHeight < 0) {
+//                            robot.linearDrive.setPower(0);
+//                        }
+//                    } else {
+//                        if (linearPower == 0 || linearExtensionHeight > 500 || linearExtensionHeight < x) {
+//                            robot.linearDrive.setPower(0);
+//                        }
+//                    }
+            /*if(gamepad}                                                                                  2.right_bumper) {
                 targetPosition = robot.linearDrive.getTargetPosition();
                 if (targetPosition == x){
                     robot.linearDrive.setTargetPosition(layer1);
@@ -139,6 +158,7 @@ public class HyperBotDriver extends LinearOpMode {
 //                robot.linearDrive.setPower(0);
 //            }
 
+            telemetry.addData("X", "x:(%d)", x);
             telemetry.addData("Right stick", "stick_y:(%.2f)", gamepad2.right_stick_y);
 
 //            //debugging
@@ -155,4 +175,44 @@ public class HyperBotDriver extends LinearOpMode {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//if(int i
+//
+//
 
