@@ -28,7 +28,7 @@ public class HyperBotDriver extends LinearOpMode {
     int linearExtensionHeight = 0;
     int layer                 = 0;
     int x                     = 0;
-    int MAX_LINEAR_POSITION   = 1000;
+    int MAX_LINEAR_POSITION   = 1140;
 
     double leftServo          = 0;
     /*boolean leftTop   = false;
@@ -67,11 +67,15 @@ public class HyperBotDriver extends LinearOpMode {
                     if (linearPower > 0) {
                         if ( linearExtensionHeight < MAX_LINEAR_POSITION) {
                             robot.linearDrive.setPower(linearPower);
+                        } else {
+                            robot.linearDrive.setPower(0);
                         }
 
-                    } else if (linearPower <0) {
+                    } else if (linearPower < 0) {
                         if ( linearExtensionHeight > 0) {
                             robot.linearDrive.setPower(linearPower) ;
+                        }  else {
+                            robot.linearDrive.setPower(0);
                         }
                     } else {
                         robot.linearDrive.setPower(0);
@@ -92,7 +96,7 @@ public class HyperBotDriver extends LinearOpMode {
 //                            robot.linearDrive.setPower(0);
 //                        }
 //                    }
-            /*if(gamepad}                                                                                  2.right_bumper) {
+            if(gamepad2.right_bumper) {
                 targetPosition = robot.linearDrive.getTargetPosition();
                 if (targetPosition == x){
                     robot.linearDrive.setTargetPosition(layer1);
@@ -115,7 +119,7 @@ public class HyperBotDriver extends LinearOpMode {
                     robot.linearDrive.setPower(-0.5);
 
                 }
-            }*/
+            }
 
             //driving robot
             sidewayRightX = gamepad1.left_stick_x; // left stick right(1)/left(-1)
@@ -175,44 +179,3 @@ public class HyperBotDriver extends LinearOpMode {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//if(int i
-//
-//
-
