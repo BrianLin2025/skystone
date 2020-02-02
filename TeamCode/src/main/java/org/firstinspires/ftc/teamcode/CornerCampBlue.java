@@ -22,12 +22,9 @@ public class CornerCampBlue extends AutoBot{
         } else {
             direction = LEFT;
         }
+        clawsUp(robot);
         move(robot, 1, 27, 4, direction);
         sleep(100);
-
-        //get closer to the bricks
-        move(robot, 0.8, 22, 5, FORWARD);
-        sleep(200);
 
         if (isBlueSide) {
             direction = LEFT;
@@ -41,12 +38,12 @@ public class CornerCampBlue extends AutoBot{
         openClaw(robot);
         sleep(800);
 
+        move(robot, 1, 24, 6, FORWARD);
         //drive to stones using distance sensor
-        moveWithDistanceSensor(robot, 0.25, 9, 7, FORWARD, 1.5);
+        moveWithDistanceSensor(robot, 0.1, 9, 7, FORWARD, 2);
         sleep(200);
 
         //scan for skystone
-        int ii = 3;
         double inchesToMoveBack = 2;
         for(int i = 0; i < 3; i++) {
             telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
@@ -54,17 +51,28 @@ public class CornerCampBlue extends AutoBot{
                     robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
             telemetry.update();
 
-            if(!isBlackStone(robot) && ii < 1 ) {
+            if(!isBlackStone(robot)) {
                 move(robot, 1, 8.5, 6, direction);
                 sleep(200);
                 inchesToMoveBack += 8.5; // every time we move away from the corner, we need to move more back
-                ii++;
+            } else {
+                break;
             }
         }
+
+        //align
+        if (isBlueSide) {
+            direction = LEFT;
+        } else {
+            direction = RIGHT;
+        }
+        move(robot, 0.7,4,2,direction);
 
         //grab stone
         closeClaw(robot);
         sleep(800);
+
+        move(robot, 0.5, 2, 1, FORWARD);
 
         //back up
         move(robot, 1, 48, 10, BACK);
@@ -77,7 +85,7 @@ public class CornerCampBlue extends AutoBot{
         }
         move(robot, 1, inchesToMoveBack, 10, direction);
 
-        sleep(10000);
+        sleep(6500);
 
         if (isBlueSide) {
             direction = LEFT;

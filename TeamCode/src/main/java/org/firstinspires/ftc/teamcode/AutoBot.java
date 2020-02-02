@@ -112,6 +112,9 @@ public class AutoBot extends LinearOpMode {
                 while (opModeIsActive() &&
                         (runtime.seconds() < timeoutS) &&
                         robot.distanceSensor.getDistance(DistanceUnit.INCH) > minDistance) {
+                    telemetry.addData("Sensors", "Distance(%.2f in)",
+                            robot.distanceSensor.getDistance(DistanceUnit.INCH));
+                    telemetry.update();
                     sleep(50);
                 }
             } else {
@@ -136,6 +139,11 @@ public class AutoBot extends LinearOpMode {
         }
     }
 
+    public void clawsUp (HyperBot robot) {
+        robot.leftServo.setPosition(0);
+        robot.rightServo.setPosition(0);
+    }
+
     public void openClaw (HyperBot robot) {
         robot.clawServo.setPosition(0);
     }
@@ -152,7 +160,7 @@ public class AutoBot extends LinearOpMode {
     }
 
     public boolean isBlackStone(HyperBot robot) {
-        return robot.colorSensor.red() < 50;
+        return robot.colorSensor.red() < 30;
     }
 
 }
