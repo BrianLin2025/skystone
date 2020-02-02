@@ -40,12 +40,12 @@ public class AutoBlueBuilding extends AutoBot {
         closeFClaw(robot);
         sleep(1000);
 
-        move(robot, 1, 2, 3, FORWARD);
-        sleep(50);
+//        move(robot, 1, 2, 3, FORWARD);
+//        sleep(50);
 
         // pull foundation back
-        move(robot, 1, 50, 9, BACK);
-        sleep(50);
+        move(robot, 1, 42, 9, BACK);
+//        sleep(50);
 
         //release foundation
         openClaw(robot);
@@ -66,11 +66,11 @@ public class AutoBlueBuilding extends AutoBot {
         closeFClaw(robot);
 
         //move forward so we won't bump into the other robot
-        move(robot, 0.9, 18.5, 6, FORWARD);
+        move(robot, 0.9, 20, 6, FORWARD);
 //        sleep(250);
 
         //go under the bridge
-        move(robot, 0.75, 52.5, 6, direction);
+        move(robot, 0.9, 52.5, 6, direction);
 //        sleep(250);
 
         //0pen the claw
@@ -78,12 +78,18 @@ public class AutoBlueBuilding extends AutoBot {
         sleep(400);
 
         //drive to stones using distance sensor
-        moveWithDistanceSensor(robot, 0.4, 16, 8, FORWARD, 1.65);
+        move(robot, 1, 8,5,FORWARD);
+        moveWithDistanceSensor(robot, 0.1, 16, 8, FORWARD, 2.3);
+        telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
+                robot.distanceSensor.getDistance(DistanceUnit.INCH),
+                robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
+        telemetry.update();
+
 //        sleep(200);
 
         double inchesToMoveBack = 45;
 
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 4; i++) {
             telemetry.addData("Sensors", "Distance(%.2f in), Red(%d), Green(%d), Blue(%d)",
                     robot.distanceSensor.getDistance(DistanceUnit.INCH),
                     robot.colorSensor.red(), robot.colorSensor.green(), robot.colorSensor.blue());
@@ -93,6 +99,8 @@ public class AutoBlueBuilding extends AutoBot {
                 move(robot, 0.65 , 8.5, 6, direction);
 //                sleep(200);
                 inchesToMoveBack += 8.75; // every time we move away from bridge, we need to move more back
+            } else {
+                break;
             }
         }
 

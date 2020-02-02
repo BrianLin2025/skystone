@@ -152,7 +152,7 @@ public class AutoBot extends LinearOpMode {
     }
 
     public boolean isBlackStone(HyperBot robot) {
-        return robot.colorSensor.red() < 60;
+        return robot.colorSensor.red() < 50;
     }
 
 }

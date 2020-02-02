@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -27,8 +26,8 @@ public class HyperBotDriver extends LinearOpMode {
 
     int linearExtensionHeight = 0;
     int layer                 = 0;
-    int x                     = 0;
-    int MAX_LINEAR_POSITION   = 1140;
+    int linearStart = 0;
+    int MAX_LINEAR_POSITION   = 1070;
 
     double leftServo          = 0;
     /*boolean leftTop   = false;
@@ -46,59 +45,48 @@ public class HyperBotDriver extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-//        x = robot.linearDrive.getCurrentPosition();
-        //robot.linearDrive.setTargetPosition(x);
-        int layer1 = 104 + x;
-        int layer2 = 295 + x;
-        int layer3 = 440 + x;
-        int layer4 = 600 + x;
-        int layer5 = 750 + x;
-        int layer6 = 910 + x;
-        int layer7 = 1100 + x;
+        linearStart = robot.linearDrive.getCurrentPosition();
+        MAX_LINEAR_POSITION = MAX_LINEAR_POSITION + linearStart;
+        robot.linearDrive.setTargetPosition(linearStart);
+        int layer1 = 104 + linearStart;
+        int layer2 = 295 + linearStart;
+        int layer3 = 440 + linearStart;
+        int layer4 = 600 + linearStart;
+        int layer5 = 750 + linearStart;
+        int layer6 = 910 + linearStart;
+        int layer7 = 1100 + linearStart;
         int targetPosition;
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             //linear extension
             linearExtensionHeight = robot.linearDrive.getCurrentPosition();
-//            if (linearExtensionHeight <= x + 500 && linearExtensionHeight >= x + 0) { // 1040
-                    robot.linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                    double linearPower = gamepad2.right_stick_y * -0.5;
+            double linearPower = gamepad2.right_stick_y * -0.5;
 
-                    if (linearPower > 0) {
-                        if ( linearExtensionHeight < MAX_LINEAR_POSITION) {
-                            robot.linearDrive.setPower(linearPower);
-                        } else {
-                            robot.linearDrive.setPower(0);
-                        }
+            if (linearPower > 0) {
+                robot.linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                if (linearExtensionHeight < MAX_LINEAR_POSITION) {
+                    robot.linearDrive.setPower(linearPower);
+                } else {
+                    robot.linearDrive.setPower(0);
+                }
 
-                    } else if (linearPower < 0) {
-                        if ( linearExtensionHeight > 0) {
-                            robot.linearDrive.setPower(linearPower) ;
-                        }  else {
-                            robot.linearDrive.setPower(0);
-                        }
-                    } else {
-                        robot.linearDrive.setPower(0);
-                    }
-//                    if (0 < linearExtensionHeight || linearExtensionHeight <  500) {
-//                        if (linearPower > 0 && linearExtensionHeight < 500) {
-//                            robot.linearDrive.setPower(linearPower);
-//                        } else if (linearPower > 0 && linearExtensionHeight > 500) {
-//                            robot.linearDrive.setPower(0);
-//                        }
-//                        if (linearPower < 0 && linearExtensionHeight > 0) {
-//                            robot.linearDrive.setPower(linearPower);
-//                        } else if (linearPower < 0 && linearExtensionHeight < 0) {
-//                            robot.linearDrive.setPower(0);
-//                        }
-//                    } else {
-//                        if (linearPower == 0 || linearExtensionHeight > 500 || linearExtensionHeight < x) {
-//                            robot.linearDrive.setPower(0);
-//                        }
-//                    }
+            } else if (linearPower < 0) {
+                robot.linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                if (linearExtensionHeight > linearStart) {
+                    robot.linearDrive.setPower(linearPower);
+                } else {
+                    robot.linearDrive.setPower(0);
+                }
+            } else {
+                robot.linearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                robot.linearDrive.setPower(0);
+            }
+
+
             if(gamepad2.right_bumper) {
+                robot.linearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 targetPosition = robot.linearDrive.getTargetPosition();
-                if (targetPosition == x){
+                if (targetPosition == linearStart){
                     robot.linearDrive.setTargetPosition(layer1);
                     if (robot.linearDrive.getCurrentPosition() < layer1) {
                         robot.linearDrive.setPower(0.5);
@@ -114,10 +102,10 @@ public class HyperBotDriver extends LinearOpMode {
 
 
             if(gamepad2.left_bumper) {
-                robot.linearDrive.setTargetPosition(x);
-                if (robot.linearDrive.getCurrentPosition() > 0) {
+                robot.linearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.linearDrive.setTargetPosition(linearStart);
+                if (robot.linearDrive.getCurrentPosition() > linearStart) {
                     robot.linearDrive.setPower(-0.5);
-
                 }
             }
 
@@ -162,7 +150,7 @@ public class HyperBotDriver extends LinearOpMode {
 //                robot.linearDrive.setPower(0);
 //            }
 
-            telemetry.addData("X", "x:(%d)", x);
+            telemetry.addData("X", "linearStart:(%d)", linearStart);
             telemetry.addData("Right stick", "stick_y:(%.2f)", gamepad2.right_stick_y);
 
 //            //debugging
