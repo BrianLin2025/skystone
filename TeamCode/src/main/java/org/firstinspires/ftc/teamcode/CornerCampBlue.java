@@ -23,16 +23,16 @@ public class CornerCampBlue extends AutoBot{
             direction = LEFT;
         }
         clawsUp(robot);
-        move(robot, 1, 27, 4, direction);
-        sleep(100);
+        move(robot, 0.8, 27, 4, direction);
+//        sleep(100);
 
         if (isBlueSide) {
             direction = LEFT;
         } else {
             direction = RIGHT;
         }
-        move(robot, 0.8, 3, 5, direction);
-        sleep(200);
+        move(robot, 0.7, 3, 5, direction);
+//        sleep(200);
 
         //open claw
         openClaw(robot);
@@ -85,7 +85,7 @@ public class CornerCampBlue extends AutoBot{
         }
         move(robot, 1, inchesToMoveBack, 10, direction);
 
-        sleep(6500);
+        sleep(2000);
 
         if (isBlueSide) {
             direction = LEFT;
@@ -93,10 +93,14 @@ public class CornerCampBlue extends AutoBot{
             direction = RIGHT;
         }
 
-        move(robot, 1, 78, 10, direction);
+        move(robot, 1, 80, 10, direction);
 
         openClaw(robot);
         sleep(800);
+
+        move(robot, 1, 1, 10, FORWARD);
+
+        move(robot, 1, 1, 10, BACK);
 
         if (isBlueSide) {
             direction = RIGHT;
