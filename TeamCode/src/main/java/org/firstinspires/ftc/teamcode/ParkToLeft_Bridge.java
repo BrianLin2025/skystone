@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name="ParkToRight", group="HGT")
-public class ParkToRight extends AutoBot {
+@Autonomous(name="ParkToLeft_Bridge", group="HGT")
+public class ParkToLeft_Bridge extends AutoBot {
     @Override
     public void runOpMode() {
 
@@ -14,6 +14,8 @@ public class ParkToRight extends AutoBot {
 
         sleep(20000);
 
-        move(robot, 1, 40, 30, RIGHT);
+        move(robot, 1, 30, 30, FORWARD);
+        move(robot, 1, 40, 30, LEFT);
     }
 }
+
